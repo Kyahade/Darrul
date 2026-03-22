@@ -5,65 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Do You Love Me?</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
 
   body {
-    height: 100vh;
     margin: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #ffe6f0;
-    font-family: 'Comic Neue', cursive;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
-    position: relative;
+    color: #fff;
   }
 
   h1 {
-    font-size: 2.5rem;
-    color: #ff0066;
-    text-shadow: 2px 2px 8px #ff99cc;
-    animation: pulse 1s infinite;
-    margin-bottom: 40px;
+    font-size: 3rem;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    animation: pulse 1.2s infinite alternate;
+    margin-bottom: 50px;
   }
 
   @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
   }
 
   .buttons {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
-    justify-content: center;
   }
 
   button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    padding: 18px 40px;
+    font-size: 1.3rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    color: white;
-    background: linear-gradient(145deg, #ff6699, #ff3399);
-    box-shadow: 0 5px 15px rgba(255,0,153,0.4);
-    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
   }
 
   button:hover {
-    transform: scale(1.1) rotate(-3deg);
-    box-shadow: 0 8px 20px rgba(255,0,153,0.6);
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
   }
 
   /* Floating hearts */
   .heart {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     position: absolute;
-    background: red;
+    background: #ff3366;
     transform: rotate(45deg);
     animation: floatUp 4s linear infinite;
     z-index: 0;
@@ -72,20 +73,19 @@
   .heart::before, .heart::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: red;
+    width: 16px;
+    height: 16px;
+    background: #ff3366;
     border-radius: 50%;
   }
 
-  .heart::before { top: -10px; left: 0; }
-  .heart::after { left: 10px; top: 0; }
+  .heart::before { top: -8px; left: 0; }
+  .heart::after { left: 8px; top: 0; }
 
   @keyframes floatUp {
     0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-    100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+    100% { transform: translateY(-500px) rotate(45deg); opacity: 0; }
   }
-
 </style>
 </head>
 <body>
@@ -97,38 +97,39 @@
 </div>
 
 <script>
-  const noBtn = document.getElementById('noBtn');
+const noBtn = document.getElementById('noBtn');
 
-  function moveNoButton() {
-    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-    noBtn.style.position = 'absolute';
-    noBtn.style.left = x + 'px';
-    noBtn.style.top = y + 'px';
-  }
+function moveNoButton() {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
+}
 
-  // Desktop hover
-  noBtn.addEventListener('mouseover', moveNoButton);
+// Desktop hover
+noBtn.addEventListener('mouseover', moveNoButton);
 
-  // Mobile touch
-  noBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    moveNoButton();
-  }, {passive:false});
+// Mobile touch
+noBtn.addEventListener('touchstart', e => {
+  e.preventDefault();
+  moveNoButton();
+}, {passive:false});
 
-  document.getElementById('yesBtn').addEventListener('click', () => {
-    alert("I knew it! 😘 I love you too!");
-  });
+// Yes button
+document.getElementById('yesBtn').addEventListener('click', () => {
+  alert("I knew it! 😘 I love you too!");
+});
 
-  // Floating hearts
-  setInterval(() => {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.animationDuration = 3 + Math.random() * 2 + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
+// Floating hearts
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 400);
 </script>
 </body>
 </html>
